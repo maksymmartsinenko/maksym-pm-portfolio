@@ -34,7 +34,7 @@
   h1,h2,h3{font-family:"Lora",Georgia,"Times New Roman",serif;line-height:1.2;letter-spacing:-0.01em;font-weight:600}
   a{color:var(--accent);text-decoration:none}
   a:hover{text-decoration:underline}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding-left:22px;padding-right:22px}
   section{padding:54px 0;border-bottom:1px solid var(--line)}
   section:last-of-type{border-bottom:none}
   .hero h1, section h2, .hook{text-align:center}
@@ -122,6 +122,26 @@
     .sticky{display:none}
     .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   }
+
+  /* plan CTA */
+  .plan-btn{display:block;width:100%;margin-top:16px;text-align:center}
+
+  /* waitlist modal */
+  .modal-overlay{position:fixed;inset:0;background:rgba(28,26,23,.55);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;padding:22px;z-index:100}
+  .modal-overlay.open{display:flex}
+  .modal{background:var(--paper);border:1px solid var(--line);border-radius:18px;max-width:440px;width:100%;padding:30px 26px 26px;position:relative;box-shadow:0 18px 50px rgba(28,26,23,.22)}
+  .modal-close{position:absolute;top:10px;right:13px;background:none;border:none;font-size:26px;line-height:1;color:var(--muted);cursor:pointer;padding:4px;font-family:inherit}
+  .modal-close:hover{color:var(--ink)}
+  .modal h3{font-size:clamp(21px,5.4vw,26px);margin:0 0 10px;text-align:left;line-height:1.25}
+  .modal .m-sub{color:var(--muted);font-size:15.5px;margin:0 0 18px}
+  .modal form{display:flex;flex-direction:column;gap:10px}
+  .modal input[type=email]{font-family:inherit;font-size:16px;padding:13px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);width:100%}
+  .modal input[type=email]:focus{outline:none;border-color:var(--accent)}
+  .modal .m-note{font-size:13px;color:var(--muted);margin:4px 0 0}
+  .modal .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+  .modal .m-success{display:none}
+  .modal.done .m-head,.modal.done form{display:none}
+  .modal.done .m-success{display:block}
 </style>
 </head>
 <body>
@@ -145,7 +165,7 @@
 <!-- СКРОЛ 1 — HERO -->
 <section class="hero wrap">
   <h1 data-v="hero_h1">Ти кидаєш книжки в оригіналі не тому, що не знаєш мови. А тому, що втомлюєшся</h1>
-  <p class="sub" data-v="hero_sub">Почни англійською. Втомився — дочитай українською. З того самого місця. «Поряд» тримає твій рядок, навіть коли мови різної довжини.</p>
+  <p class="sub" data-v="hero_sub">Почни англійською. Втомився — дочитай українською. З того самого місця. «Поряд» тримає твій рядок, навіть коли мови різної довжини</p>
 
   <div class="biglyph" aria-hidden="true">
     <div class="col en"><span class="tag">Original</span>“She read the first page in one language…”</div>
@@ -198,7 +218,7 @@
 <section class="wrap">
   <h2>Чесно про те, як ми влаштовані</h2>
   <ul class="trust-list">
-    <li><b>Легально й чесно.</b><span>Ядро каталогу — твори суспільного надбання (public domain), не піратство.</span></li>
+    <li><b>Легально й чесно.</b><span>Ядро каталогу — твори суспільного надбання (<i>public domain</i>), не піратство.</span></li>
     <li><b>Зроблено в Україні.</b><span>Україномовний каталог; рф-автори в нього не потрапляють за замовчуванням.</span></li>
     <li><b>Без накруток.</b><span>Ми концепт-продукт на старті — тому не показуємо відгуків і цифр, яких ще нема. Покажемо, коли вони будуть справжні.</span></li>
     <li><b>Чому ми це робимо.</b><span>Ми самі читали оригінал в одному застосунку, а переклад тримали в іншому — і щоразу губили рядок. Не знайшли, де перехід безшовний, — тож зробили «Поряд».</span></li>
@@ -213,10 +233,11 @@
       <div class="name">Free</div>
       <div class="price">$0</div>
       <ul><li class="free-note">Усе суспільне надбання — повністю безкоштовно, без лімітів.</li></ul>
+      <button class="btn plan-btn" type="button" data-modal>Читати безкоштовно</button>
     </div>
     <div class="plan featured">
       <div class="name">Premium</div>
-      <div class="price">$2,99<small> /міс</small></div>
+      <div class="price">$2,99<small>&nbsp;/міс</small></div>
       <ul>
         <li>Повний доступ</li>
         <li>Переключення мов без обмежень</li>
@@ -224,7 +245,8 @@
         <li>Режим «Не турбувати»</li>
         <li>Трекер</li>
       </ul>
-      <div class="trial"><b>7 днів безкоштовно</b> — повний доступ одразу, оплата лише на 7-й день, скасувати будь-коли.<br>Річний — <b>$35,88/рік</b> (= $2,99/міс).</div>
+      <div class="trial"><b>7&nbsp;днів безкоштовно</b> — повний доступ одразу, оплата лише на 7-й&nbsp;день, скасувати будь-коли.<br>Річний — <b>$35,88/рік</b> (= $2,99/міс).</div>
+      <button class="btn plan-btn" type="button" data-modal>Спробувати 7 днів безкоштовно</button>
     </div>
   </div>
 </section>
@@ -260,7 +282,7 @@
 
 <!-- USER FLOW -->
 <section class="wrap flow">
-  <h2>User flow</h2>
+  <h2>Шлях користувача</h2>
   <p class="lead">Шлях користувача від каналу входу до читання: полиця-хаб, неперервне читання з безшовним переключенням режимів, trial із доступом одразу.</p>
   <figure>
     <img src="user-flow.svg" alt="User flow застосунку «Поряд»: канали входу → полиця-хаб → читання з переключенням перекладів → апгрейд через trial">
@@ -277,6 +299,30 @@
 <!-- sticky CTA на мобайлі -->
 <div class="sticky"><a class="btn" href="#taryfy">Читати безкоштовно</a></div>
 
+<!-- WAITLIST MODAL -->
+<div class="modal-overlay" id="waitlist" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="wl-title">
+    <button class="modal-close" type="button" aria-label="Закрити">&times;</button>
+    <div class="m-head">
+      <h3 id="wl-title">Стоп. Кнопка є — продукту ще нема</h3>
+      <p class="m-sub">Ми будуємо «Поряд» просто зараз. Лиши пошту — смикнемо тебе першим, щойно можна буде читати. Без черги.</p>
+    </div>
+    <form method="POST" target="brevo_sink" action="https://e9239ce2.sibforms.com/serve/MUIFAPELs8wojXhHGtzb9BQfsoB--CT-7-I4MqaIZBvgjNLOUwEoXLQIlJVXRLhrZnAvrB3cGl-i-ixfprDGH5IUvq1zGdYdxqLs5kvQZcTojqp7JDXa50Td5u4CRewtSQH5G5onCYpI63xjNQr6dZvIjJ0gBNYRtwKr0_czG03lhrejdwDKKtQSl-XEMILsqoWIuMuSnuf8597P9g==">
+      <input type="email" name="EMAIL" placeholder="твоя@пошта.com" required autocomplete="email" aria-label="Email">
+      <input type="text" name="email_address_check" value="" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <input type="hidden" name="locale" value="en">
+      <input type="hidden" name="html_type" value="simple">
+      <button class="btn" type="submit">Хочу бути першим</button>
+      <p class="m-note">Один лист. Без розсилок про «знижку 24 години».</p>
+    </form>
+    <div class="m-success">
+      <h3>Готово — ти в списку</h3>
+      <p class="m-sub">Смикнемо першим, щойно «Поряд» можна буде читати.</p>
+    </div>
+  </div>
+</div>
+<iframe name="brevo_sink" style="display:none" aria-hidden="true" tabindex="-1" title="brevo"></iframe>
+
 <script>
 /* Варіантний движок: ?v= (або utm_campaign) підставляє тексти скролів 1–3.
    Зараз ЖИВИЙ лише дефолт (Комплект A) — він захардкоджений у HTML.
@@ -287,7 +333,7 @@
     // ?v=mova — Комплект B (вивчення мови, двомовний читач). Скроли 1–3 з TASK3-landing-content.md.
     mova: {
       hero_h1: 'Ти не кидаєш мову. Ти кидаєш книжку, де кожне слово — це стоп',
-      hero_sub: 'Читай в оригіналі, а коли застрягаєш — перемкнись на повний український переклад із того самого місця й повертайся, коли готовий. Незнайоме слово тапни прямо в тексті.',
+      hero_sub: 'Читай в оригіналі, а коли застрягаєш — перемкнись на повний український переклад із того самого місця й повертайся, коли готовий. Незнайоме слово тапни прямо в тексті',
       hero_roadmap: 'Скоро — аудіо: слухай вимову й переключайся між текстом і озвучкою в тій самій книжці.',
       hero_cta: 'Почати безкоштовно',
       prob_hook: 'Словник убиває читання',
@@ -330,6 +376,46 @@
       });
     }
   }
+})();
+</script>
+
+<script>
+/* Waitlist-модалка: тарифи Free/Premium → поп-ап із формою Brevo.
+   Форма постить у прихований iframe (brevo_sink) — користувач лишається на лендінгу,
+   а ми показуємо власний стан «Готово». */
+(function () {
+  var overlay = document.getElementById('waitlist');
+  if (!overlay) return;
+  var card = overlay.querySelector('.modal');
+  var form = overlay.querySelector('form');
+  var emailInput = overlay.querySelector('input[type=email]');
+  var lastFocus = null;
+
+  function open(trigger) {
+    lastFocus = trigger || document.activeElement;
+    card.classList.remove('done');
+    if (form) form.reset();
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    if (emailInput) setTimeout(function () { emailInput.focus(); }, 30);
+  }
+  function close() {
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  document.querySelectorAll('[data-modal]').forEach(function (b) {
+    b.addEventListener('click', function (e) { e.preventDefault(); open(b); });
+  });
+  overlay.querySelector('.modal-close').addEventListener('click', close);
+  overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) close();
+  });
+
+  // нативний submit іде в iframe; тут лише перемикаємо UI на «Готово»
+  if (form) form.addEventListener('submit', function () { card.classList.add('done'); });
 })();
 </script>
 
