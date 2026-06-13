@@ -63,18 +63,10 @@
   .hero-banner h1{color:#fff;text-shadow:0 1px 14px rgba(12,16,28,.45);margin:0 0 .4em}
   .hero-banner .sub{color:#F2EEE7;text-shadow:0 1px 10px rgba(12,16,28,.4)}
 
-  /* app screen mockup (phone) */
-  .phone-wrap{display:flex;justify-content:center;margin:6px 0 2px}
-  .phone{width:228px;background:#1C1A17;border-radius:30px;padding:10px;box-shadow:0 14px 34px rgba(28,26,23,.18)}
-  .phone .screen{background:var(--paper);border-radius:22px;padding:18px 16px}
-  .phone .tag{font-family:-apple-system,sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin:2px 0 6px}
-  .phone .tag.en{color:var(--muted)}
-  .phone .tag.ua{color:var(--accent)}
-  .phone .ln{height:9px;border-radius:5px;margin:7px 0}
-  .phone .ln.en{background:#DAD3C8}
-  .phone .ln.ua{background:#C3D0E4}
-  .phone .w1{width:92%}.phone .w2{width:78%}.phone .w3{width:85%}.phone .w4{width:63%}
-  .phone .switch{display:flex;align-items:center;justify-content:center;gap:6px;background:var(--accent);color:#fff;font-family:-apple-system,sans-serif;font-size:12px;font-weight:600;padding:8px 10px;border-radius:20px;margin:14px 0}
+  /* app screen visual (how it works) */
+  .how-visual{margin:8px 0 2px;text-align:center}
+  .how-visual img{width:260px;max-width:80%;height:auto;display:inline-block;border-radius:16px}
+  .how-visual figcaption{font-size:14px;color:var(--muted);margin-top:8px}
 
   /* bilingual hero visual — converging columns */
   .biglyph{display:flex;gap:0;align-items:stretch;margin:26px 0 4px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--card)}
@@ -227,17 +219,10 @@
 <section class="wrap" id="yak">
   <h2 data-v="how_title">Як працює «Поряд»</h2>
 
-  <div class="phone-wrap" aria-hidden="true">
-    <div class="phone">
-      <div class="screen">
-        <div class="tag en">Original</div>
-        <div class="ln en w1"></div><div class="ln en w3"></div><div class="ln en w2"></div>
-        <div class="switch">EN ⇄ UA · перемкнути</div>
-        <div class="tag ua">Українською</div>
-        <div class="ln ua w1"></div><div class="ln ua w4"></div><div class="ln ua w2"></div>
-      </div>
-    </div>
-  </div>
+  <figure class="how-visual">
+    <img src="how-switch.png" alt="Екран «Поряд»: одне місце у творі, кнопка-перемикач — читай оригінал або український переклад із того самого рядка" width="260" height="260" loading="lazy">
+    <figcaption>Один екран, одне місце — перемкни мову й читай далі.</figcaption>
+  </figure>
 
   <div class="cards" data-v-list="how_points">
     <div class="card">
