@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Поряд — читай в оригіналі, дочитуй українською</title>
+<meta name="description" content="«Поряд» — читай книжку в оригіналі й перемикайся на український переклад із того самого місця. Free назавжди, Premium $2,99/міс.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF7F2;
+    --ink:#1C1A17;
+    --accent:#2B4C7E;
+    --accent-soft:#2B4C7E14;
+    --card:#FFFFFF;
+    --line:#E7E0D6;
+    --muted:#6B655C;
+    --maxw:680px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    padding-bottom:88px; /* room for sticky CTA on mobile */
+  }
+  h1,h2,h3{font-family:"Lora",Georgia,"Times New Roman",serif;line-height:1.2;letter-spacing:-0.01em;font-weight:600}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  section{padding:54px 0;border-bottom:1px solid var(--line)}
+  section:last-of-type{border-bottom:none}
+
+  /* header / logo */
+  .topbar{display:flex;align-items:center;gap:10px;padding:18px 0}
+  .logo{display:flex;align-items:center;gap:10px;font-family:"Lora",Georgia,serif;font-weight:700;font-size:21px;color:var(--ink)}
+  .logo svg{display:block}
+
+  /* hero */
+  .hero{padding-top:18px}
+  .hero h1{font-size:clamp(30px,7vw,46px);margin:.1em 0 .5em;font-weight:700}
+  .hero .sub{font-size:clamp(18px,4.4vw,21px);color:var(--ink);max-width:34ch}
+  .roadmap{margin-top:18px;font-size:15px;color:var(--muted);background:var(--accent-soft);border-left:3px solid var(--accent);padding:11px 14px;border-radius:0 8px 8px 0}
+  .roadmap b{color:var(--accent)}
+
+  /* bilingual hero visual — converging columns */
+  .biglyph{display:flex;gap:0;align-items:stretch;margin:26px 0 4px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--card)}
+  .biglyph .col{flex:1;padding:18px 16px;font-family:"Lora",Georgia,serif;font-size:16px;line-height:1.5}
+  .biglyph .en{color:var(--muted);background:#fff}
+  .biglyph .seam{width:0;border-left:2px dashed var(--accent);opacity:.5}
+  .biglyph .ua{color:var(--ink);background:var(--accent-soft)}
+  .biglyph .tag{display:block;font-family:-apple-system,sans-serif;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);margin-bottom:6px;font-weight:600}
+
+  /* CTA buttons */
+  .btn{display:inline-block;background:var(--accent);color:#fff;font-size:17px;font-weight:600;padding:15px 28px;border-radius:11px;border:none;cursor:pointer;font-family:inherit}
+  .btn:hover{text-decoration:none;background:#23406b}
+  .cta-row{margin-top:24px}
+
+  /* problem */
+  .hook{font-family:"Lora",Georgia,serif;font-size:clamp(22px,5.2vw,28px);font-weight:600;margin:0 0 14px}
+
+  /* how it works cards */
+  .cards{display:flex;flex-direction:column;gap:14px;margin-top:22px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 18px;box-shadow:0 1px 2px rgba(28,26,23,.03)}
+  .card .n{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--accent-soft);color:var(--accent);font-weight:700;font-size:14px;margin-bottom:8px;font-family:"Lora",serif}
+  .card h3{font-size:18px;margin:0 0 4px}
+  .card p{margin:0;color:var(--muted);font-size:15.5px}
+  .soon{font-size:14px;color:var(--muted);margin-top:14px;font-style:italic}
+  .badge-soon{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:2px 8px;border-radius:20px;vertical-align:middle;margin-left:6px}
+
+  /* trust */
+  .trust-list{list-style:none;padding:0;margin:22px 0 0;display:flex;flex-direction:column;gap:18px}
+  .trust-list li{padding-left:0}
+  .trust-list b{display:block;font-family:"Lora",serif;font-size:17px;margin-bottom:3px}
+  .trust-list span{color:var(--muted);font-size:15.5px}
+
+  /* pricing */
+  .plans{display:flex;flex-direction:column;gap:16px;margin-top:24px}
+  .plan{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+  .plan.featured{border:2px solid var(--accent)}
+  .plan .name{font-family:"Lora",serif;font-size:20px;font-weight:600}
+  .plan .price{font-size:30px;font-weight:700;font-family:"Lora",serif;margin:6px 0 2px}
+  .plan .price small{font-size:15px;font-weight:500;color:var(--muted)}
+  .plan ul{margin:14px 0 0;padding-left:18px;color:var(--muted);font-size:15.5px}
+  .plan ul li{margin-bottom:6px}
+  .plan .free-note{color:var(--ink)}
+  .trial{margin-top:14px;font-size:14.5px;background:var(--accent-soft);border-radius:9px;padding:11px 13px}
+
+  /* faq */
+  .faq{margin-top:18px}
+  .faq details{border-bottom:1px solid var(--line);padding:14px 0}
+  .faq summary{font-family:"Lora",serif;font-weight:600;font-size:17px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";color:var(--accent);font-weight:700;flex-shrink:0}
+  .faq details[open] summary::after{content:"–"}
+  .faq p{margin:10px 0 2px;color:var(--muted);font-size:15.5px}
+
+  /* user flow */
+  .flow figure{margin:20px 0 0;border:1px solid var(--line);border-radius:14px;background:#fff;padding:14px;overflow:auto}
+  .flow img{width:100%;height:auto;display:block;min-width:520px}
+  .flow .cap{font-size:14px;color:var(--muted);margin-top:10px}
+
+  .lead{font-size:16.5px;color:var(--muted);max-width:54ch}
+  .eyebrow{font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);font-weight:600;margin:0 0 10px}
+
+  /* sticky mobile CTA */
+  .sticky{position:fixed;left:0;right:0;bottom:0;background:rgba(250,247,242,.95);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:12px 22px;display:flex;justify-content:center;z-index:50}
+  .sticky .btn{width:100%;max-width:var(--maxw);text-align:center}
+
+  footer{padding:30px 0 20px;color:var(--muted);font-size:13.5px;text-align:center}
+
+  @media(min-width:720px){
+    body{padding-bottom:0}
+    .sticky{display:none}
+    .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  }
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="topbar">
+    <span class="logo" aria-label="Поряд">
+      <!-- лого: дві сторінки/стовпці, що сходяться -->
+      <svg width="34" height="30" viewBox="0 0 34 30" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+        <path d="M17 5 C12 2.5 5 2.5 2 4 L2 25 C5 23.5 12 23.5 17 26 Z" fill="#2B4C7E" fill-opacity="0.16" stroke="#2B4C7E" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M17 5 C22 2.5 29 2.5 32 4 L32 25 C29 23.5 22 23.5 17 26 Z" fill="#2B4C7E" fill-opacity="0.16" stroke="#2B4C7E" stroke-width="1.6" stroke-linejoin="round"/>
+        <line x1="17" y1="5" x2="17" y2="26" stroke="#2B4C7E" stroke-width="1.6"/>
+      </svg>
+      Поряд
+    </span>
+  </div>
+</header>
+
+<main>
+
+<!-- СКРОЛ 1 — HERO -->
+<section class="hero wrap">
+  <h1 data-v="hero_h1">Ти кидаєш книжки в оригіналі не тому, що не знаєш мови. А тому, що втомлюєшся.</h1>
+  <p class="sub" data-v="hero_sub">Почни англійською. Втомився — дочитай українською. З того самого місця. «Поряд» тримає твій рядок, навіть коли мови різної довжини.</p>
+
+  <div class="biglyph" aria-hidden="true">
+    <div class="col en"><span class="tag">Original</span>“She read the first page in one language…”</div>
+    <div class="seam"></div>
+    <div class="col ua"><span class="tag">Українською</span>«…і дочитала наступну іншою — з того самого рядка.»</div>
+  </div>
+
+  <p class="roadmap" data-v="hero_roadmap"><b>Скоро</b> — аудіо в тій самій книжці: слухай, коли руки зайняті, і повертайся до читання з того ж рядка.</p>
+
+  <div class="cta-row">
+    <a class="btn" href="#taryfy" data-v="hero_cta">Читати безкоштовно</a>
+  </div>
+</section>
+
+<!-- СКРОЛ 2 — ПРОБЛЕМА -->
+<section class="wrap">
+  <p class="hook" data-v="prob_hook">Перемкнувся на переклад — і загубив, де був.</p>
+  <p class="lead" data-v="prob_body">Ти хочеш насолодитися оригіналом, а не здати його на пів-книжці. Але втомився на цікавому місці — і далі або мучишся, або закриваєш. Український переклад поряд дав би просто дочитати з того самого рядка.</p>
+</section>
+
+<!-- СКРОЛ 3 — ЯК ПРАЦЮЄ -->
+<section class="wrap">
+  <h2 data-v="how_title">Як працює «Поряд»</h2>
+  <div class="cards" data-v-list="how_points">
+    <div class="card">
+      <span class="n">1</span>
+      <h3>Один твір, дві мови, один рядок.</h3>
+      <p>Читай в оригіналі (англ. / фр. / нім. / ісп. / польська) і перемикайся на український переклад із того самого місця — позиція тримається попри різну довжину тексту.</p>
+    </div>
+    <div class="card">
+      <span class="n">2</span>
+      <h3>Забув слово — тапни.</h3>
+      <p>Переклад лише його, не виходячи з тексту.</p>
+    </div>
+    <div class="card">
+      <span class="n">3</span>
+      <h3>Режим «Не турбувати».</h3>
+      <p>Занурення без сповіщень.</p>
+    </div>
+    <div class="card">
+      <span class="n">4</span>
+      <h3>Трекер.</h3>
+      <p>Бачиш, скільки і якою мовою прочитав.</p>
+    </div>
+  </div>
+  <p class="soon">Аудіо (текст↔озвучка) <span class="badge-soon">скоро</span></p>
+</section>
+
+<!-- СКРОЛ 4 — ДОВІРА -->
+<section class="wrap">
+  <p class="eyebrow">Чесні сигнали</p>
+  <h2>Чесно про те, як ми влаштовані.</h2>
+  <ul class="trust-list">
+    <li><b>Легально й чесно.</b><span>Ядро каталогу — твори суспільного надбання (public domain), не піратство.</span></li>
+    <li><b>Зроблено в Україні.</b><span>Україномовний каталог; рф-автори в нього не потрапляють — за замовчуванням, без гасел.</span></li>
+    <li><b>Без накруток.</b><span>Ми концепт-продукт на старті — тому не показуємо відгуків і цифр, яких ще нема. Покажемо, коли вони будуть справжні.</span></li>
+    <li><b>Чому ми це робимо.</b><span>Ми самі читали оригінал в одному застосунку, а переклад тримали в іншому — і щоразу губили рядок. Не знайшли, де перехід безшовний, — тож зробили «Поряд».</span></li>
+  </ul>
+</section>
+
+<!-- СКРОЛ 5 — ТАРИФИ -->
+<section class="wrap" id="taryfy">
+  <h2>Почни безкоштовно. Платиш, лише коли захочеш більше.</h2>
+  <div class="plans">
+    <div class="plan">
+      <div class="name">Free</div>
+      <div class="price">$0</div>
+      <ul><li class="free-note">Усе суспільне надбання — повністю безкоштовно, без лімітів.</li></ul>
+    </div>
+    <div class="plan featured">
+      <div class="name">Premium</div>
+      <div class="price">$2,99<small> /міс</small></div>
+      <ul>
+        <li>Повний доступ</li>
+        <li>Переключення мов без обмежень</li>
+        <li>Переклад фрагментів</li>
+        <li>Режим «Не турбувати»</li>
+        <li>Трекер</li>
+      </ul>
+      <div class="trial"><b>7 днів безкоштовно</b> — повний доступ одразу, оплата лише на 7-й день, скасувати будь-коли.<br>Річний — <b>$35,88/рік</b> (= $2,99/міс).</div>
+    </div>
+  </div>
+</section>
+
+<!-- СКРОЛ 6 — ФІНАЛЬНИЙ CTA + FAQ -->
+<section class="wrap">
+  <h2 data-v="final_h">Готовий читати «Поряд»?</h2>
+  <div class="cta-row"><a class="btn" href="#taryfy">Читати безкоштовно</a></div>
+
+  <div class="faq">
+    <details open>
+      <summary>Скільки коштує?</summary>
+      <p>Free назавжди + Premium $2,99/міс. Перші 7 днів Premium — безкоштовно.</p>
+    </details>
+    <details>
+      <summary>Що з російськими авторами?</summary>
+      <p>Їх нема в каталозі — за замовчуванням. Україномовний feed.</p>
+    </details>
+    <details>
+      <summary>Це легально?</summary>
+      <p>Так. Ядро каталогу — твори суспільного надбання.</p>
+    </details>
+    <details>
+      <summary>Що означає «читати у двох мовах»?</summary>
+      <p>Відкриваєш твір в оригіналі й продовжуєш українським перекладом із того самого місця — позиція тримається попри різну довжину тексту.</p>
+    </details>
+    <details>
+      <summary>А аудіо є?</summary>
+      <p>Скоро — слухати й переключатися текст↔озвучка в тій самій книжці.</p>
+    </details>
+  </div>
+</section>
+
+<!-- USER FLOW -->
+<section class="wrap flow">
+  <p class="eyebrow">Під капотом</p>
+  <h2>User flow</h2>
+  <p class="lead">Шлях користувача від каналу входу до читання: полиця-хаб, неперервне читання з безшовним переключенням режимів, trial із доступом одразу.</p>
+  <figure>
+    <img src="user-flow.svg" alt="User flow застосунку «Поряд»: канали входу → полиця-хаб → читання з переключенням перекладів → апгрейд через trial">
+    <figcaption class="cap">Повна діаграма: <a href="user-flow.svg" target="_blank" rel="noopener">відкрити user-flow.svg</a></figcaption>
+  </figure>
+</section>
+
+</main>
+
+<footer class="wrap">
+  «Поряд» · poryad.app · читай в оригіналі, дочитуй українською
+</footer>
+
+<!-- sticky CTA на мобайлі -->
+<div class="sticky"><a class="btn" href="#taryfy">Читати безкоштовно</a></div>
+
+<script>
+/* Варіантний движок: ?v= (або utm_campaign) підставляє тексти скролів 1–3.
+   Зараз ЖИВИЙ лише дефолт (Комплект A) — він захардкоджений у HTML.
+   variants нижче — заготовка: 'mova' і 'treker' порожні до здачі.
+   Невідомий / відсутній параметр → дефолт (нічого не переписуємо). */
+(function () {
+  var variants = {
+    mova: {},    // ?v=mova — Комплект B (вивчення мови) — додається після здачі
+    treker: {}   // ?v=treker — трекер переключень — додається після здачі
+  };
+
+  var params = new URLSearchParams(window.location.search);
+  var key = (params.get('v') || params.get('utm_campaign') || '').toLowerCase();
+  var v = variants[key];                 // невідомий/порожній ключ → undefined → дефолт
+  if (!v || Object.keys(v).length === 0) return;
+
+  // прості текстові поля
+  Object.keys(v).forEach(function (field) {
+    if (field === 'how_points') return;
+    var el = document.querySelector('[data-v="' + field + '"]');
+    if (el && typeof v[field] === 'string') el.textContent = v[field];
+  });
+
+  // блок карток «Як працює» (масив {h3, p})
+  if (Array.isArray(v.how_points)) {
+    var list = document.querySelector('[data-v-list="how_points"]');
+    if (list) {
+      list.innerHTML = v.how_points.map(function (p, i) {
+        return '<div class="card"><span class="n">' + (i + 1) + '</span>' +
+               '<h3></h3><p></p></div>';
+      }).join('');
+      var cards = list.querySelectorAll('.card');
+      v.how_points.forEach(function (p, i) {
+        cards[i].querySelector('h3').textContent = p.h3 || '';
+        cards[i].querySelector('p').textContent = p.p || '';
+      });
+    }
+  }
+})();
+</script>
+
+</body>
+</html>

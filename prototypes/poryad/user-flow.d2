@@ -1,0 +1,204 @@
+# User flow «Поряд» — Полиця-хаб (контейнер) · неперервне Читання (контейнер) · deep-link/звичайний лінк · trial = доступ одразу
+# Конвенція: прямокутник (дія) = 1 вихід; розгалуження — через ромб. Пунктир = (next) або відкладена подія.
+# Заземлення: VPC/Value Map ДЗ-2 + BMC (USP-1 переключення; VP переклад фрагментів + трекер + Reading Mode/DND; USP-2 рф: baseline каталог без рф-авторів, наратив = next; RS trial 7дн + річний) + ціна $2,99 (TASK1/COMPETITORS)
+# Свідомо поза обсягом: вибір/пошук книжки, деталі полиці (discovery — окремий флоу)
+# Рендер: d2.exe user-flow.d2 user-flow.svg
+
+direction: down
+
+channels: «Channels (Канали)» {
+  style.fill: "#cfe2f3"
+
+  landing: Лендінг «Поряд» {
+    style.fill: "#dbe9f5"
+  }
+  booktok: BookTok / short-video (реферал) {
+    style.fill: "#dbe9f5"
+  }
+  organic: Органіка / контент-маркетинг {
+    style.fill: "#dbe9f5"
+  }
+  stores: App Store / Google Play {
+    style.fill: "#dbe9f5"
+  }
+  ads: Платна реклама (next) {
+    style.fill: "#f0f0f0"
+    style.stroke-dash: 4
+  }
+}
+
+d_link: Deep-link на книжку? {
+  shape: diamond
+  style.fill: "#f4cccc"
+}
+
+shelf: «Полиця» — хаб (вхід/вихід · статус · ліміти) {
+  style.fill: "#d7cce0"
+
+  onb: Онбординг\n(показує переключення між перекладами, USP-1) {
+    style.fill: "#ece3f2"
+  }
+  lib: Полиці\n(читаю / в планах / прочитано) {
+    style.fill: "#ece3f2"
+  }
+  status: Статус підписки + ліміти free-tier {
+    style.fill: "#ece3f2"
+  }
+}
+
+d_action: Дія на полиці? {
+  shape: diamond
+  style.fill: "#f4cccc"
+}
+
+open: Відкрити / продовжити книгу\n(каталог UA-only — без рф-авторів) {
+  shape: rectangle
+  style.fill: "#e8f0fe"
+}
+
+d_access: Доступ за free-tier? {
+  shape: diamond
+  style.fill: "#f4cccc"
+}
+
+reading: «Читання» — неперервне, безшовне переключення режимів {
+  style.fill: "#fff8e1"
+
+  switch: Переключення між перекладами\n(USP-1) {
+    style.fill: "#fff2cc"
+  }
+  frag: Переклад окремих фрагментів / слів\n(двомовний читач) {
+    style.fill: "#fff2cc"
+  }
+  dnd: Reading Mode (DND)\nспокійне занурення {
+    style.fill: "#fff2cc"
+  }
+  audio: Аудіо: TTS ↔ текст\n(next) {
+    style.fill: "#f0f0f0"
+    style.stroke-dash: 4
+  }
+  narrative: Позначка рос. наративу\n(USP-2, next) {
+    style.fill: "#f0f0f0"
+    style.stroke-dash: 4
+  }
+  tracker: Трекер переключень\n(лог: мова, переклад, формат, режим) {
+    style.fill: "#e1f5fe"
+  }
+
+  switch -> tracker: лог
+  frag -> tracker: лог
+  dnd -> tracker: лог
+  audio -> tracker: лог {
+    style.stroke-dash: 4
+  }
+  narrative -> tracker: лог {
+    style.stroke-dash: 4
+  }
+}
+
+reg: Реєстрація /\nстворення акаунта {
+  shape: rectangle
+  style.fill: "#d9ead3"
+}
+
+merge: Збереження гостьового прогресу\nв акаунт {
+  shape: rectangle
+  style.fill: "#d9ead3"
+}
+
+plan: Вибір плану\nМісячний \$2,99  /  Річний (знижка) {
+  shape: rectangle
+  style.fill: "#d9ead3"
+}
+
+trial: Trial 7 днів\n(старт підписки) {
+  shape: rectangle
+  style.fill: "#d9ead3"
+}
+
+d_trial: День 7: скасовано? {
+  shape: diamond
+  style.fill: "#f4cccc"
+}
+
+pay: Автосписання ₴ {
+  shape: rectangle
+  style.fill: "#d9ead3"
+}
+
+d_pay: Оплата успішна? {
+  shape: diamond
+  style.fill: "#f4cccc"
+}
+
+sub: Підписник\n(повний доступ) {
+  shape: oval
+  style.fill: "#2f6f4f"
+  style.font-color: "#ffffff"
+}
+
+stay: Лишається на Free {
+  shape: rectangle
+  style.fill: "#eeeeee"
+}
+
+newsession: Нова сесія\n(новий вхід пізніше) {
+  shape: rectangle
+  style.fill: "#eeeeee"
+}
+
+d_reg: Зареєстрований? {
+  shape: diamond
+  style.fill: "#f4cccc"
+}
+
+login: Логін + синхронізація\n(обов'язково для зареєстрованих) {
+  shape: rectangle
+  style.fill: "#e8f0fe"
+}
+
+guestret: Гостьовий режим\n(локальний прогрес) {
+  shape: rectangle
+  style.fill: "#e8f0fe"
+}
+
+# --- канали входу ---
+channels -> d_link
+d_link -> reading: так (deep-link, повз полицю; гостьовий режим можливий)
+d_link -> shelf: ні
+
+# --- полиця-хаб: дія через ромб ---
+shelf -> d_action
+d_action -> open: відкрити / продовжити
+d_action -> newsession: завершити сесію
+
+# --- відкриття книги: перевірка доступу/ліміту ---
+open -> d_access
+d_access -> reading: у межах (public domain / 1 безкошт.)
+d_access -> reg: понад ліміт (преміум)
+
+# --- апгрейд: trial дає доступ ОДРАЗУ ---
+reg -> merge
+merge -> plan
+plan -> trial
+trial -> reading: trial 7 днів — повний доступ одразу
+trial -> d_trial: через 7 днів (відкладено) {
+  style.stroke-dash: 4
+}
+d_trial -> stay: так (скасував)
+d_trial -> pay: ні (триває)
+pay -> d_pay
+d_pay -> sub: так
+d_pay -> stay: ні (retry / Free)
+sub -> reading: повний доступ
+stay -> reading: доступний контент
+
+# --- вихід із читання — на полицю ---
+reading -> shelf: на полицю
+
+# --- нова сесія: логін через ромб ---
+newsession -> d_reg
+d_reg -> login: зареєстрований
+d_reg -> guestret: незареєстрований
+login -> shelf
+guestret -> shelf
